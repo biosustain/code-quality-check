@@ -33,6 +33,8 @@ jobs:
       - name: Check if GHAS is enabled
         uses: actions/github-script@v7
         id: ghas-enabled
+        outputs:
+          result: ${{ steps.ghas-enabled.outputs.result == 'true' }}
         with:
           script: |
             const response = await github.rest.repos.get({
