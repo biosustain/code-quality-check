@@ -114,8 +114,12 @@ jobs:
             }
             return securityEnabled;
 
+      - name: Check if GHAS is enabled
+        if:  steps.ghas-enabled.outputs.result
+        run: echo "GHAS is enabled ${{  steps.ghas-enabled.outputs.result }}"
+
       - name: Upload MegaLinter scan results to GitHub Security tab
-        if: (success() || failure()) && steps.ghas-enabled.outputs.result
+        if: steps.ghas-enabled.outputs.result && (success() || failure())
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'megalinter-reports/megalinter-report.sarif'
