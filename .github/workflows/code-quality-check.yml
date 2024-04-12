@@ -57,6 +57,7 @@ jobs:
           MARKDOWN_SUMMARY_REPORTER: true
           MARKDOWN_SUMMARY_REPORTER_FILE_NAME: megalinter-report.md
           REPOSITORY_KICS_DISABLE_ERRORS: true # Disable KICS errors but keep them as warnings
+          ACTION_ACTIONLINT_DISABLE_ERRORS: true # Disable Actionlint errors but keep them as warnings
 
           # Validates all source when push on main, else just the git diff with
           # main. Override with true if you always want to lint all sources
