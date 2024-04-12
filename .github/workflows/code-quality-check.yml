@@ -1,5 +1,5 @@
 name: Code Quality
-description: Workflow to check if project meets the code quality standards of the Biosustain group
+# Workflow to check if project meets the code quality standards of the Biosustain group
 
 on:
   workflow_call:
@@ -7,6 +7,7 @@ on:
       apply_fixes:
         description: 'Apply linter fixes configuration. "all" to apply fixes of all linters, or a list of linter keys (ex: "JAVASCRIPT_ES,MARKDOWN_MARKDOWNLINT")'
         required: false
+        type: string
   # Trigger the workflow also on push or pull request in this repository
   push:
     branches:
