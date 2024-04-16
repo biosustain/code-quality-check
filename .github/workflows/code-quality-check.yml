@@ -115,7 +115,7 @@ jobs:
           MARKDOWN_SUMMARY_REPORTER: true
 
           GITHUB_WORKSPACE: ${{ github.workspace }}/code
-          DEFAULT_WORKSPACE: code
+          DEFAULT_WORKSPACE: ${{ github.workspace }}/code
 
           # Extend the configuration file if it exists, else use default
           EXTENDS: ${{ hashFiles('code/.mega-linter.yml') != '' && '../config/.mega-linter.yml' || '' }}
