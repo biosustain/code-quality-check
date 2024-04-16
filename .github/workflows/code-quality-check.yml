@@ -114,7 +114,7 @@ jobs:
 
           # Extend the configuration file if it exists, else use default
           EXTENDS: ${{ hashFiles('.mega-linter.yml') != '' && '/config/.mega-linter.yml' || '' }}
-          MEGALINTER_CONFIG_FILE: ${{ hashFiles('.mega-linter.yml') = '' && '/config/.mega-linter.yml' || '' }}
+          MEGALINTER_CONFIG_FILE: ${{ hashFiles('.mega-linter.yml') == '' && '/config/.mega-linter.yml' || '' }}
 
           # Validates all source when push on main, else just the git diff with
           # main. Override with true if you always want to lint all sources
