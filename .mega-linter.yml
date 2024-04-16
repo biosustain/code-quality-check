@@ -10,7 +10,6 @@ CONSOLE_REPORTER: true
 UPDATED_SOURCES_REPORTER: false
 GITHUB_COMMENT_REPORTER: false
 
-
 DISABLE:
 #  - CLOUDFORMATION
 #  - COPYPASTE
@@ -22,6 +21,7 @@ DISABLE:
 DISABLE_LINTERS:
   - SQL_TSQLLINT # .NET Core is not installed - always fails
   - JSON_V8R # Most schemas are not supported
+  - YAML_V8R # Most schemas are not supported
   - PYTHON_ISORT # We can live without alphabetically sorted imports - something to consider in future
   - PYTHON_PYRIGHT # I cannot get imports to work with this linter
   - HTML_HTMLHINT # It does not align with frameworks like Angular
@@ -148,7 +148,7 @@ DISABLE_ERRORS_LINTERS:
 #  - REPOSITORY_SYFT
   - REPOSITORY_TRIVY
 #  - REPOSITORY_TRIVY_SBOM
-  - REPOSITORY_TRUFFLEHOG
+#  - REPOSITORY_TRUFFLEHOG
   - SPELL_CSPELL
   - SPELL_PROSELINT
   - SPELL_VALE
