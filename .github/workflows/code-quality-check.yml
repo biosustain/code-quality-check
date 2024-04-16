@@ -118,8 +118,8 @@ jobs:
           DEFAULT_WORKSPACE: code
 
           # Extend the configuration file if it exists, else use default
-          EXTENDS: ${{ hashFiles('code/.mega-linter.yml') != '' && '../config/.mega-linter.yml' || '' }}
-          MEGALINTER_CONFIG_FILE: ${{ hashFiles('code/.mega-linter.yml') == '' && '../config/.mega-linter.yml' || '' }}
+          EXTENDS: ${{ hashFiles('code/.mega-linter.yml') != '' && 'config/.mega-linter.yml' || '' }}
+          MEGALINTER_CONFIG_FILE: ${{ hashFiles('code/.mega-linter.yml') == '' && 'config/.mega-linter.yml' || '' }}
 
           # Validates all source when push on main, else just the git diff with
           # main. Override with true if you always want to lint all sources
