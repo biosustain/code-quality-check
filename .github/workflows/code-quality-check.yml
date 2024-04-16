@@ -114,7 +114,7 @@ jobs:
           SARIF_REPORTER: true
           MARKDOWN_SUMMARY_REPORTER: true
 
-          GITHUB_WORKSPACE: code
+          GITHUB_WORKSPACE: .
           DEFAULT_WORKSPACE: code
 
           # Extend the configuration file if it exists, else use default
