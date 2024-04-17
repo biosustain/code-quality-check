@@ -59,7 +59,7 @@ env:
   # or posted in a PR (pull_request)
   APPLY_FIXES_MODE: ${{ github.event.inputs.APPLY_FIXES_MODE }}
 
-  MEGALINT_VERSION: a7a0163 # v7.10.0
+  MEGALINT_VERSION: a7a0163b6c8ff7474a283d99a706e27483ddd80f # v7.10.0
 
 jobs:
   check-code-quality:
@@ -120,7 +120,7 @@ jobs:
 
       # MegaLinter
       - name: MegaLinter
-        uses: jenseng/dynamic-uses@5175289 # v1
+        uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb # v1
         # All available variables are described in documentation
         # https://megalinter.io/configuration/
         env:
@@ -210,7 +210,7 @@ jobs:
       # Create pull request if applicable
       # (for now works only on PR from same repository, not from forks)
       - name: Create Pull Request with applied fixes
-        uses: peter-evans/create-pull-request@c55203c # v6.0.3
+        uses: peter-evans/create-pull-request@c55203cfde3e5c11a452d352b4393e68b85b4533 # v6.0.3
         id: cpr
         if: env.APPLY_FIXES_IF_PR == 'true'
         with:
@@ -232,7 +232,7 @@ jobs:
         run: sudo chown -Rc $UID .git/
 
       - name: Commit and push applied linter fixes
-        uses: stefanzweifel/git-auto-commit-action@8621497 # v5.0.1
+        uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5.0.1
         if: env.APPLY_FIXES_IF_COMMIT == 'true'
         with:
           branch: >-
