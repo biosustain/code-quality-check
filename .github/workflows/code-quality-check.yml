@@ -196,7 +196,7 @@ jobs:
         env:
           ML_OUTPUT: ${{ toJSON(steps.ml.outputs) }}
         run: |
-          jq '$ML_OUTPUT'
+          jq "$ML_OUTPUT"
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
@@ -210,6 +210,7 @@ jobs:
 
       - name: Upload MegaLinter scan results to GitHub Security tab
         continue-on-error: true
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'megalinter-reports/megalinter-report.sarif'
