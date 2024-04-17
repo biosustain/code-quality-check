@@ -130,6 +130,7 @@ jobs:
       - name: Load configuration
         uses: actions/checkout@v4
         with:
+          repository: biosustain/code-quality-check
           path: config
 
       - name: Checkout Code
