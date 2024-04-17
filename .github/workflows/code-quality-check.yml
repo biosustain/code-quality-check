@@ -155,7 +155,7 @@ jobs:
             # This cannot be set is there is no .mega-linter.yml in project
             echo 'EXTENDS=../config/.mega-linter.yml' | tee $GITHUB_ENV
           else
-            echo 'MEGALINTER_CONFIG_FILE=../config/.mega-linter.yml' | tee $GITHUB_ENV
+            echo 'MEGALINTER_CONFIG=../config/.mega-linter.yml' | tee $GITHUB_ENV
           fi
 
       # MegaLinter
