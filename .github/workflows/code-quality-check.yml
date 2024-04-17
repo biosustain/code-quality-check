@@ -142,12 +142,19 @@ jobs:
           # improve performance
           fetch-depth: 0
 
-      - name: Decide Megalint flavour
+      - name: Decide Megalint flavour and set config environment variables
         run: |
           if [ -f code/.mega-linter.yml ]; then
             echo "Using project specific MegaLinter configuration"
           else
             echo "Using default MegaLinter configuration"
+          fi
+          # Extend the configuration file if it exists, else use default
+          if [ -f code/.mega-linter.yml ]; then
+            # This cannot be set is there is no .mega-linter.yml in project
+            echo "EXTENDS='../config/.mega-linter.yml'" | tee $GITHUB_ENV
+          else
+            echo "MEGALINTER_CONFIG_FILE='../config/.mega-linter.yml'" | tee $GITHUB_ENV
           fi
 
       # MegaLinter
@@ -163,10 +170,6 @@ jobs:
 
           GITHUB_WORKSPACE: ${{ github.workspace }}/code
           DEFAULT_WORKSPACE: ${{ github.workspace }}/code
-
-          # Extend the configuration file if it exists, else use default
-          EXTENDS: ${{ hashFiles('code/.mega-linter.yml') != '' && '../config/.mega-linter.yml' || '' }}
-          MEGALINTER_CONFIG_FILE: ${{ hashFiles('code/.mega-linter.yml') == '' && '../config/.mega-linter.yml' || '' }}
 
           # Validates all source when push on main, else just the git diff with
           # main. Override with true if you always want to lint all sources
