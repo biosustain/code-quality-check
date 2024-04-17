@@ -25,6 +25,13 @@ on:
         required: false
         default: pull_request
         type: string
+      FLAVOUR:
+        description: |
+          You can override MegaLinter flavor used to have faster performances
+          More info at https://megalinter.io/flavors/
+        required: false
+        default: all
+        type: string
   # Trigger the workflow also on push or pull request in this repository
   push:
     branches:
@@ -51,6 +58,8 @@ env:
   # If APPLY_FIXES is used, defines if the fixes are directly committed (commit)
   # or posted in a PR (pull_request)
   APPLY_FIXES_MODE: ${{ github.event.inputs.APPLY_FIXES_MODE }}
+
+  MEGALINT_VERSION: a7a0163 # v7.10.0
 
 jobs:
   check-code-quality:
@@ -101,12 +110,17 @@ jobs:
           # improve performance
           fetch-depth: 0
 
+      - name: Decide Megalint flavour
+        run: |
+          if [ -f code/.mega-linter.yml ]; then
+            echo "Using project specific MegaLinter configuration"
+          else
+            echo "Using default MegaLinter configuration"
+          fi
+
       # MegaLinter
       - name: MegaLinter
-        # You can override MegaLinter flavor used to have faster performances
-        # More info at https://megalinter.io/flavors/
-        uses: oxsecurity/megalinter@v7
-
+        uses: jenseng/dynamic-uses@5175289 # v1
         # All available variables are described in documentation
         # https://megalinter.io/configuration/
         env:
@@ -140,6 +154,10 @@ jobs:
             }}
 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # You can override MegaLinter flavor used to have faster performances
+          # More info at https://megalinter.io/flavors/
+          uses: oxsecurity/megalinter/flavour/${{ inputs.FLAVOUR }}@${{ env.MEGALINT_VERSION }}
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
@@ -192,7 +210,7 @@ jobs:
       # Create pull request if applicable
       # (for now works only on PR from same repository, not from forks)
       - name: Create Pull Request with applied fixes
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c55203c # v6.0.3
         id: cpr
         if: env.APPLY_FIXES_IF_PR == 'true'
         with:
@@ -214,7 +232,7 @@ jobs:
         run: sudo chown -Rc $UID .git/
 
       - name: Commit and push applied linter fixes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@8621497 # v5.0.1
         if: env.APPLY_FIXES_IF_COMMIT == 'true'
         with:
           branch: >-
