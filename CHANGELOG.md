@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/biosustain/code-quality-check/compare/v1.0.6...v1.0.7) (2024-04-17)
+
+
+### Bug Fixes
+
+* flavour setting ([c8951c6](https://github.com/biosustain/code-quality-check/commit/c8951c61ea3d72c8c2c52e9e3e7fcb9887ef9bd4))
+
 ## [1.0.6](https://github.com/biosustain/code-quality-check/compare/v1.0.5...v1.0.6) (2024-04-17)
 
 
