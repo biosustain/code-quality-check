@@ -1,9 +1,16 @@
-name: Release Code Quality Check
+name: Release
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run'
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: read # for checkout
@@ -28,12 +35,16 @@ jobs:
         uses: cycjimmy/semantic-release-action@v4
         id: semantic   # Need an `id` for output variables
         with:
-          dry_run: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dry_run: ${{ github.event.inputs.dry_run }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Show semantic output
-        env:
-          SEMANTIC_OUTPUT: ${{ toJSON(steps.semantic.outputs) }}
+      - name: Summary
         run: |
-          jq "$SEMANTIC_OUTPUT"
+          cat << EOF | tee $GITHUB_STEP_SUMMARY
+          Release [${{ steps.semantic.outputs.new_release_version }}](https://github.com/semantic-release/github/releases/tag/${{ steps.semantic.outputs.new_release_git_tag }})
+          [${{ steps.semantic.outputs.new_release_git_head }}](https://github.com/biosustain/code-quality-check/commit/${{ steps.semantic.outputs.new_release_git_head }})
+
+          ${{ steps.semantic.outputs.release_notes }}
+          EOF
