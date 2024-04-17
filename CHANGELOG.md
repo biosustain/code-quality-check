@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/biosustain/code-quality-check/compare/v1.0.8...v1.0.9) (2024-04-17)
+
+
+### Bug Fixes
+
+* correct spelling ([2e985d4](https://github.com/biosustain/code-quality-check/commit/2e985d4f1bae6542186799d9fb95e12895a7524a))
+
 ## [1.0.8](https://github.com/biosustain/code-quality-check/compare/v1.0.7...v1.0.8) (2024-04-17)
 
 
