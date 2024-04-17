@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/biosustain/code-quality-check/compare/v1.0.9...v1.0.10) (2024-04-17)
+
+
+### Bug Fixes
+
+* permissions ([39fe9d1](https://github.com/biosustain/code-quality-check/commit/39fe9d11a667c46fc4b9eeaea250af03e8ce9423))
+
 ## [1.0.9](https://github.com/biosustain/code-quality-check/compare/v1.0.8...v1.0.9) (2024-04-17)
 
 
