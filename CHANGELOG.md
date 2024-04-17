@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/biosustain/code-quality-check/compare/v1.0.3...v1.0.4) (2024-04-17)
+
+
+### Bug Fixes
+
+* megalinter config loc env ([f92d297](https://github.com/biosustain/code-quality-check/commit/f92d2978718006cffd79429cd74b3ddee3a886de))
+
 ## [1.0.3](https://github.com/biosustain/code-quality-check/compare/v1.0.2...v1.0.3) (2024-04-17)
 
 
