@@ -1,0 +1,8 @@
+# 1.0.0 (2024-04-17)
+
+
+### Bug Fixes
+
+* code quality release code ([1761ceb](https://github.com/biosustain/code-quality-check/commit/1761ceb104087e746edb5c867df3304c9f2eac20))
+* code quality release code ([b0b3294](https://github.com/biosustain/code-quality-check/commit/b0b329437f943e23d7290040577f1320ffe151a7))
+* code quality release code ([d8ad3e4](https://github.com/biosustain/code-quality-check/commit/d8ad3e4e41c5660fa5219a6d1da2e785305841e6))
