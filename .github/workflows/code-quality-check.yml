@@ -37,8 +37,8 @@ on:
       APPLY_FIXES: # If true, the workflow will try to fix the issues
         description: |
           Apply linter fixes configuration.
-          'all' to apply fixes of all linters, or a list of linter keys (ex: JAVASCRIPT_ES,MARKDOWN_MARKDOWNLINT)
-        required: true
+          Leave empty to not apply fixes, 'all' to apply fixes of all linters, or a list of linter keys (ex: JAVASCRIPT_ES,MARKDOWN_MARKDOWNLINT)
+        required: false
         default: all
         type: string
       APPLY_FIXES_EVENT:
