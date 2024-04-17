@@ -100,18 +100,18 @@ env:
   #
   # When active, APPLY_FIXES must also be defined as environment variable
   # (in github/workflows/mega-linter.yml or other CI tool)
-  APPLY_FIXES: ${{ github.event.inputs.APPLY_FIXES || 'none' }}
+  APPLY_FIXES: ${{ inputs.APPLY_FIXES || 'none' }}
 
   # Decide which event triggers application of fixes in a commit or a PR
   # (pull_request, push, all)
-  APPLY_FIXES_EVENT: ${{ github.event.inputs.APPLY_FIXES_EVENT }}
+  APPLY_FIXES_EVENT: ${{ inputs.APPLY_FIXES_EVENT }}
 
   # If APPLY_FIXES is used, defines if the fixes are directly committed (commit)
   # or posted in a PR (pull_request)
-  APPLY_FIXES_MODE: ${{ github.event.inputs.APPLY_FIXES_MODE }}
+  APPLY_FIXES_MODE: ${{ inputs.APPLY_FIXES_MODE }}
 
   MEGALINT_VERSION: a7a0163b6c8ff7474a283d99a706e27483ddd80f # v7.10.0
-  MEGALINT_FLAVOUR: ${{ github.event.inputs.FLAVOUR && format('/flavour/{}', github.event.inputs.FLAVOUR) || '' }}
+  MEGALINT_FLAVOUR: ${{ inputs.FLAVOUR && format('/flavour/{}', inputs.FLAVOUR) || '' }}
 
 jobs:
   check-code-quality:
@@ -143,13 +143,8 @@ jobs:
           # improve performance
           fetch-depth: 0
 
-      - name: Decide Megalint flavour and set config environment variables
+      - name: Set config path environment variables
         run: |
-          if [ -f code/.mega-linter.yml ]; then
-            echo "Using project specific MegaLinter configuration"
-          else
-            echo "Using default MegaLinter configuration"
-          fi
           # Extend the configuration file if it exists, else use default
           if [ -f code/.mega-linter.yml ]; then
             # This cannot be set is there is no .mega-linter.yml in project
