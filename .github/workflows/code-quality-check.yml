@@ -132,26 +132,6 @@ jobs:
         with:
           path: config
 
-      - name: Check if GHAS is enabled
-        uses: actions/github-script@v7
-        id: ghas-enabled
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const response = await github.rest.repos.get({
-              owner: '${{ github.repository }}'.split("/")[0],
-              repo: '${{ github.repository }}'.split("/")[1]
-            });
-            const securityEnabled = response.data.security_and_analysis?.advanced_security?.status === 'enabled';
-
-            if (!securityEnabled) {
-              let message = 'GitHub Advanced Security is NOT enabled.';
-              const url = 'https://docs.github.com/en/code-security/code-scanning/troubleshooting-code-scanning/advanced-security-must-be-enabled';
-              message += ` For more information, see ${url}`;
-              core.warning(message);
-            }
-            return securityEnabled;
-
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -222,7 +202,7 @@ jobs:
             mega-linter.log
 
       - name: Upload MegaLinter scan results to GitHub Security tab
-        if: (steps.ghas-enabled.outputs.result == 'true') && (success() || failure())
+        continue-on-error: true
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'megalinter-reports/megalinter-report.sarif'
