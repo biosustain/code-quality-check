@@ -1,0 +1,34 @@
+name: Release Code Quality Check
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release code quality check
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        id: semantic   # Need an `id` for output variables
+        with:
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show semantic output
+        env:
+          SEMANTIC_OUTPUT: ${{ toJSON(steps.semantic.outputs) }}
+        run: |
+          jq "$SEMANTIC_OUTPUT"
