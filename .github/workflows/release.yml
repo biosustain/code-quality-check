@@ -35,12 +35,12 @@ jobs:
         uses: cycjimmy/semantic-release-action@v4
         id: semantic   # Need an `id` for output variables
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           dry_run: ${{ github.event.inputs.dry_run }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Summary
+      - name: Summary Published
+        if: steps.semantic.outputs.new_release_published == 'true'
         run: |
           cat << EOF | tee $GITHUB_STEP_SUMMARY
           Release [${{ steps.semantic.outputs.new_release_version }}](https://github.com/semantic-release/github/releases/tag/${{ steps.semantic.outputs.new_release_git_tag }})
