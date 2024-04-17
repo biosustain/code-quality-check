@@ -46,5 +46,5 @@ jobs:
           Release [${{ steps.semantic.outputs.new_release_version }}](https://github.com/semantic-release/github/releases/tag/${{ steps.semantic.outputs.new_release_git_tag }})
           [${{ steps.semantic.outputs.new_release_git_head }}](https://github.com/biosustain/code-quality-check/commit/${{ steps.semantic.outputs.new_release_git_head }})
 
-          ${{ steps.semantic.outputs.release_notes }}
+          ${{ steps.semantic.outputs.new_release_notes }}
           EOF
