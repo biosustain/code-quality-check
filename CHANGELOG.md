@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/biosustain/code-quality-check/compare/v1.0.1...v1.0.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* quotations ([212a7d3](https://github.com/biosustain/code-quality-check/commit/212a7d3ec393d6c914f652a280488a3b85ef7b1a))
+
 ## [1.0.1](https://github.com/biosustain/code-quality-check/compare/v1.0.0...v1.0.1) (2024-04-17)
 
 
