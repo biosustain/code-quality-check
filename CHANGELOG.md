@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/biosustain/code-quality-check/compare/v1.0.4...v1.0.5) (2024-04-17)
+
+
+### Bug Fixes
+
+* access inputs of workflow not event; cleanup flavour setting ([29d6989](https://github.com/biosustain/code-quality-check/commit/29d69899f68dd2ba51f736f0cbdae4f6bfca2067))
+
 ## [1.0.4](https://github.com/biosustain/code-quality-check/compare/v1.0.3...v1.0.4) (2024-04-17)
 
 
