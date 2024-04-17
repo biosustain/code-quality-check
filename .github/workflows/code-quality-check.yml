@@ -110,7 +110,7 @@ env:
   # or posted in a PR (pull_request)
   APPLY_FIXES_MODE: ${{ inputs.APPLY_FIXES_MODE }}
 
-  MEGALINT_VERSION: a7a0163b6c8ff7474a283d99a706e27483ddd80f # v7.10.0
+  MEGALINT_VERSION: v7.10.0 # Cannot pin this version since we use multiple flavors
   MEGALINT_FLAVOUR: ${{ inputs.FLAVOUR && format('/flavour/{0}', inputs.FLAVOUR) || '' }}
 
 jobs:
