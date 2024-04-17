@@ -120,11 +120,12 @@ jobs:
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues & post new PR; remove the ones you do not need
-    permissions: write-all
-#      actions: read # Needed to run codeql/upload-sarif@v3
-#      contents: write
-#      issues: write
-#      pull-requests: write
+    permissions:
+      security-events: write
+      actions: read # Needed to run codeql/upload-sarif@v3
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
       - name: Load configuration
