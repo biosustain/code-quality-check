@@ -60,7 +60,7 @@ env:
   APPLY_FIXES_MODE: ${{ github.event.inputs.APPLY_FIXES_MODE }}
 
   MEGALINT_VERSION: a7a0163b6c8ff7474a283d99a706e27483ddd80f # v7.10.0
-  MEGALINT_FLAVOUR: ${{ github.event.inputs.FLAVOUR && ('/flavour/' + github.event.inputs.FLAVOUR) || '' }}
+  MEGALINT_FLAVOUR: ${{ github.event.inputs.FLAVOUR && format('/flavour/{}', github.event.inputs.FLAVOUR) || '' }}
 
 jobs:
   check-code-quality:
