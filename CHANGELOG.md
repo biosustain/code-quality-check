@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/biosustain/code-quality-check/compare/v1.0.7...v1.0.8) (2024-04-17)
+
+
+### Bug Fixes
+
+* do not pin megalint version ([43cdbbd](https://github.com/biosustain/code-quality-check/commit/43cdbbde59fc599e54f7a2f756fc2240e3234032))
+
 ## [1.0.7](https://github.com/biosustain/code-quality-check/compare/v1.0.6...v1.0.7) (2024-04-17)
 
 
