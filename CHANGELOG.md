@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/biosustain/code-quality-check/compare/v1.0.5...v1.0.6) (2024-04-17)
+
+
+### Bug Fixes
+
+* try setting correct permissions ([bdb7a85](https://github.com/biosustain/code-quality-check/commit/bdb7a85801e9948f9c9e95a7b65c19de8f7f8906))
+
 ## [1.0.5](https://github.com/biosustain/code-quality-check/compare/v1.0.4...v1.0.5) (2024-04-17)
 
 
