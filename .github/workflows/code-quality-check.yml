@@ -120,11 +120,11 @@ jobs:
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues & post new PR; remove the ones you do not need
-    permissions:
-      actions: read # Needed to run codeql/upload-sarif@v3
-      contents: write
-      issues: write
-      pull-requests: write
+    permissions: write-all
+#      actions: read # Needed to run codeql/upload-sarif@v3
+#      contents: write
+#      issues: write
+#      pull-requests: write
 
     steps:
       - name: Load configuration
@@ -153,6 +153,7 @@ jobs:
       # MegaLinter
       - name: MegaLinter
         uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb # v1
+        id: ml
         # All available variables are described in documentation
         # https://megalinter.io/configuration/
         env:
@@ -190,6 +191,12 @@ jobs:
           # You can override MegaLinter flavor used to have faster performances
           # More info at https://megalinter.io/flavors/
           uses: oxsecurity/megalinter${{ env.MEGALINT_FLAVOUR }}@${{ env.MEGALINT_VERSION }}
+
+      - name: Show MegaLinter output
+        env:
+          ML_OUTPUT: ${{ toJSON(steps.ml.outputs) }}
+        run: |
+          jq '$ML_OUTPUT'
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
