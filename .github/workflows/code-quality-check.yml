@@ -32,6 +32,57 @@ on:
         required: false
         default: ''
         type: string
+  workflow_dispatch:
+    inputs:
+      APPLY_FIXES: # If true, the workflow will try to fix the issues
+        description: |
+          Apply linter fixes configuration.
+          'all' to apply fixes of all linters, or a list of linter keys (ex: JAVASCRIPT_ES,MARKDOWN_MARKDOWNLINT)
+        required: true
+        default: all
+        type: string
+      APPLY_FIXES_EVENT:
+        description: |
+          Decide which event triggers application of fixes in a commit or a PR.
+          'pull_request', 'push', 'all'
+        required: false
+        default: workflow_dispatch
+        type: string
+      APPLY_FIXES_MODE:
+        description: |
+          If APPLY_FIXES is used, defines if the fixes are directly committed (commit)
+          or posted in a PR (pull_request)
+        required: false
+        default: pull_request
+        type: string
+      FLAVOUR:
+        description: |
+          You can override MegaLinter flavor used to have faster performances
+          More info at https://megalinter.io/flavors/
+        required: false
+        default: ''
+        type: choice
+        options:
+        - all
+        - c_cpp
+        - ci_light
+        - cupcake
+        - documentation
+        - dotnet
+        - dotnetweb
+        - formatters
+        - go
+        - java
+        - javascript
+        - php
+        - python
+        - ruby
+        - rust
+        - salesforce
+        - security
+        - swift
+        - terraformg
+
   # Trigger the workflow also on push or pull request in this repository
   push:
     branches:
