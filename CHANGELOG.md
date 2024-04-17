@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/biosustain/code-quality-check/compare/v1.0.0...v1.0.1) (2024-04-17)
+
+
+### Bug Fixes
+
+* support no .mega-linter.yml file ([17e9810](https://github.com/biosustain/code-quality-check/commit/17e98103950748295f915e949cfc3b112791e3a1))
+
 # 1.0.0 (2024-04-17)
 
 
