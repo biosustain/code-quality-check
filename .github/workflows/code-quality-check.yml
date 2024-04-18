@@ -9,7 +9,7 @@ on:
           JSON string with environment variables to pass to the mega-linter.
           To pass all environment variables, use toJson(env)
         required: false
-        default: {} # Empty JSON object
+        default: '{}' # Empty JSON object
         type: string
       FLAVOR:
         description: |
@@ -24,7 +24,7 @@ on:
         description: |
           JSON string with environment variables to pass to the mega-linter.
         required: false
-        default: "{}" # Empty JSON object
+        default: '{}' # Empty JSON object
         type: string
       FLAVOR:
         description: |
