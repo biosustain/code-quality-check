@@ -145,7 +145,7 @@ jobs:
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
-        if: always() && (steps.ml.outcome == 'success' || steps.ml.outcome == 'failure') # Only upload if MegaLinter ran
+        if: always() && (steps.ml.outcome == 'failure') # Only upload if MegaLinter failed
         with:
           name: MegaLinter reports
           path: |
@@ -154,11 +154,11 @@ jobs:
 
       - name: Upload MegaLinter scan results to GitHub Security tab
         continue-on-error: true # This might error if github advanced security is not enabled
-        if: always() && (steps.ml.outcome == 'success' || steps.ml.outcome == 'failure') # Only upload if MegaLinter ran
+        if: always() && (steps.ml.outcome == 'failure') # Only upload if MegaLinter failed
         uses: github/codeql-action/upload-sarif@c7f9125735019aa87cfc361530512d50ea439c71 # v3.25.1
         with:
           sarif_file: "megalinter-reports/megalinter-report.sarif"
 
       - name: Show report in job summary
-        if: always() && (steps.ml.outcome == 'success' || steps.ml.outcome == 'failure') # Only upload if MegaLinter ran
+        if: always() && (steps.ml.outcome == 'success' || steps.ml.outcome == 'failure') # Only show if MegaLinter ran
         run: tee "$GITHUB_STEP_SUMMARY" < megalinter-reports/megalinter-report.md
