@@ -4,7 +4,7 @@ name: Code Quality
 on:
   workflow_call:
     inputs:
-      ENV:
+      JSON_ENV:
         description: |
           JSON string with environment variables to pass to the mega-linter.
           To pass all environment variables, use ${{ '${{ toJson(env) }}' }}
@@ -20,7 +20,7 @@ on:
         type: string
   workflow_dispatch:
     inputs:
-      ENV:
+      JSON_ENV:
         description: |
           JSON string with environment variables to pass to the mega-linter.
           To pass all environment variables, use ${{ '${{ toJson(env) }}' }}
@@ -85,7 +85,7 @@ jobs:
   check-code-quality:
     name: Run MegaLinter to check code quality
     runs-on: ubuntu-latest
-    env: ${{ fromJson(inputs.ENV) }} # Pass environment
+    env: ${{ fromJson(inputs.JSON_ENV) }} # Pass environment
 
     steps:
       - name: Load configuration
