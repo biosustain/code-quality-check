@@ -9,7 +9,7 @@ on:
           JSON string with environment variables to pass to the mega-linter.
           To pass all environment variables, use toJson(env)
         required: false
-        default: "{}" # Empty JSON object
+        default: {} # Empty JSON object
         type: string
       FLAVOR:
         description: |
@@ -84,7 +84,7 @@ jobs:
   check-code-quality:
     name: Run MegaLinter to check code quality
     runs-on: ubuntu-latest
-    env: fromJson(inputs.JSON_ENV) # Pass environment
+    env: ${{ fromJson(inputs.JSON_ENV) }} # Pass environment
 
     steps:
       - name: Load configuration
