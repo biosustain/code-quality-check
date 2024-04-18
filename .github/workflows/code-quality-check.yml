@@ -84,7 +84,6 @@ jobs:
   check-code-quality:
     name: Run MegaLinter to check code quality
     runs-on: ubuntu-latest
-    env: ${{ fromJson(inputs.JSON_ENV) }} # Pass environment
 
     steps:
       - name: Load configuration
@@ -101,13 +100,17 @@ jobs:
           fetch-depth: 0
 
       - name: Set config path environment variables
+        env:
+          JSON_ENV: ${{ inputs.JSON_ENV }}
         run: |
+          # Set the environment variables for the MegaLinter
+          echo "$JSON_ENV" | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" | tee -a "$GITHUB_ENV"
           # Extend the configuration file if it exists, else use default
           if [ -f code/.mega-linter.yml ]; then
             # This cannot be set is there is no .mega-linter.yml in project
-            echo 'EXTENDS=../config/.mega-linter.yml' | tee "$GITHUB_ENV"
+            echo 'EXTENDS=../config/.mega-linter.yml' | tee -a "$GITHUB_ENV"
           else
-            echo 'MEGALINTER_CONFIG=../config/.mega-linter.yml' | tee "$GITHUB_ENV"
+            echo 'MEGALINTER_CONFIG=../config/.mega-linter.yml' | tee -a "$GITHUB_ENV"
           fi
 
       # MegaLinter
