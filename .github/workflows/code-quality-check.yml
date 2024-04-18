@@ -78,7 +78,7 @@ concurrency:
 
 env:
   MEGALINT_VERSION: v7.10.0 # Cannot pin this version since we use multiple flavors
-  MEGALINT_FLAVOR: ${{ inputs.FLAVOR != 'all' && format('/flavors/{0}', inputs.FLAVOR) || '' }}
+  MEGALINT_FLAVOR: ${{ (inputs.FLAVOR && inputs.FLAVOR != 'all') && format('/flavors/{0}', inputs.FLAVOR) || '' }}
 
 jobs:
   check-code-quality:
