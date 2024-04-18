@@ -16,7 +16,7 @@ on:
           You can override MegaLinter flavor used to have faster performances
           More info at https://megalinter.io/flavors/
         required: false
-        default: ""
+        default: all
         type: string
   workflow_dispatch:
     inputs:
