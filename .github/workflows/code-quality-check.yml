@@ -85,7 +85,7 @@ jobs:
   check-code-quality:
     name: Run MegaLinter to check code quality
     runs-on: ubuntu-latest
-    env: ${{ fromJson(inputs.JSON_ENV) }} # Pass environment
+    env: fromJson(inputs.JSON_ENV) # Pass environment
 
     steps:
       - name: Load configuration
