@@ -16,7 +16,7 @@ on:
 jobs:
   code-quality-check:
     name: Code quality check
-    uses: biosustain/code-quality-check/.github/workflows/code-quality-check.yml@latest
+    uses: biosustain/code-quality-check/code-quality-check.yml@latest
 ```
 
 Alternatively, for better performance one can use specific [megalinter flavour](https://megalinter.io/latest/flavors/).
@@ -34,5 +34,5 @@ on:
 jobs:
   code-quality-check:
     name: Code quality check
-    uses: biosustain/code-quality-check/.github/workflows/flavors/python-code-quality-check.yml@latest
+    uses: biosustain/code-quality-check/flavors/python-code-quality-check.yml@latest
 ```
