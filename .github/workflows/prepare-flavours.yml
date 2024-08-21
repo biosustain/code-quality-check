@@ -35,6 +35,7 @@ jobs:
           do
             echo "::group::${flavor}"
             sed -e "s|oxsecurity/megalinter|oxsecurity/megalinter/flavors/${flavor}|" .github/workflows/code-quality-check.yml > .github/workflows/${flavor}-code-quality-check.yml
+            sed -i -e "s|name: Code Quality|name: Code Quality ${flavor}|" .github/workflows/${flavor}-code-quality-check.yml
             echo "Updated .github/workflows/${flavor}-code-quality-check.yml"
             echo "::endgroup::"
           done
