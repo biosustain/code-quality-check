@@ -77,7 +77,7 @@ jobs:
 
       # MegaLinter
       - name: MegaLinter
-        uses: oxsecurity/megalinter/flavors/${flavor}@v7.10.0
+        uses: oxsecurity/megalinter/flavors/java@v7.10.0
         id: ml
         env:
           # All available variables are described in documentation
