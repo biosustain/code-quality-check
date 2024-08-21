@@ -48,7 +48,6 @@ DISABLE_ERRORS_LINTERS:
   - MARKDOWN_MARKDOWNLINT # Not high priority but need to be manually curated for generated files - high effort
   - REPOSITORY_CHECKOV # Have problem with understanding the issues
 
-
 # endregion
 
 # region Linters configuration

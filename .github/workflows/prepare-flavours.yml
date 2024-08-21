@@ -1,5 +1,4 @@
 name: Update flavours
-description: Update flavours code quality checks
 
 on:
   workflow_dispatch:
@@ -7,10 +6,10 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/code-quality-check.yml'
-      - '.github/workflows/flavors/**'
-      - '.github/workflows/prepare-flavours.yml'
-      - 'bin/prepare-flavors.sh'
+      - ".github/workflows/code-quality-check.yml"
+      - ".github/workflows/flavors/**"
+      - ".github/workflows/prepare-flavours.yml"
+      - "bin/prepare-flavors.sh"
 
 permissions:
   contents: write
@@ -34,7 +33,7 @@ jobs:
           for flavor in c_cpp ci_light cupcake documentation dotnet dotnetweb formatters go java javascript php python ruby rust salesforce security swift terraform
           do
             echo "::group::${flavor}"
-            sed -e 's|oxsecurity/megalinter|oxsecurity/megalinter/flavors/${flavor}|' .github/workflows/code-quality-check.yml > .github/workflows/flavors/${flavor}-code-quality-check.yml
+            sed -e "s|oxsecurity/megalinter|oxsecurity/megalinter/flavors/${flavor}|" .github/workflows/code-quality-check.yml > .github/workflows/flavors/${flavor}-code-quality-check.yml
             echo "Updated .github/workflows/flavors/${flavor}-code-quality-check.yml"
             echo "::endgroup::"
           done
