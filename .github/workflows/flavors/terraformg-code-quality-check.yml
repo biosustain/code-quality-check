@@ -11,6 +11,13 @@ on:
         required: false
         default: '{}' # Empty JSON object
         type: string
+      FLAVOR:
+        description: |
+          You can override MegaLinter flavor used to have faster performances
+          More info at https://megalinter.io/flavors/
+        required: false
+        default: all
+        type: string
   workflow_dispatch:
     inputs:
       JSON_ENV:
@@ -19,6 +26,33 @@ on:
         required: false
         default: '{}' # Empty JSON object
         type: string
+      FLAVOR:
+        description: |
+          You can override MegaLinter flavor used to have faster performances
+          More info at https://megalinter.io/flavors/
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - c_cpp
+          - ci_light
+          - cupcake
+          - documentation
+          - dotnet
+          - dotnetweb
+          - formatters
+          - go
+          - java
+          - javascript
+          - php
+          - python
+          - ruby
+          - rust
+          - salesforce
+          - security
+          - swift
+          - terraformg
 
   # Trigger the workflow also on push or pull request in this repository
   push:
@@ -41,6 +75,10 @@ permissions:
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
+
+env:
+  MEGALINT_VERSION: v7.10.0 # Cannot pin this version since we use multiple flavors
+  MEGALINT_FLAVOR: ${{ (inputs.FLAVOR && inputs.FLAVOR != 'all') && format('/flavors/{0}', inputs.FLAVOR) || '' }}
 
 jobs:
   check-code-quality:
@@ -77,7 +115,7 @@ jobs:
 
       # MegaLinter
       - name: MegaLinter
-        uses: oxsecurity/megalinter@v7.10.0
+        uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb # v1
         id: ml
         env:
           # All available variables are described in documentation
@@ -99,6 +137,10 @@ jobs:
             }}
 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # You can override MegaLinter flavor used to have faster performances
+          # More info at https://megalinter.io/flavors/
+          uses: oxsecurity/megalinter/flavors/${flavor}${{ env.MEGALINT_FLAVOR }}@${{ env.MEGALINT_VERSION }}
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts

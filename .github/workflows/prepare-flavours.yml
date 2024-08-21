@@ -1,0 +1,47 @@
+name: Update flavours
+description: Update flavours code quality checks
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/code-quality-check.yml'
+      - '.github/workflows/flavors/**'
+      - '.github/workflows/prepare-flavours.yml'
+      - 'bin/prepare-flavors.sh'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+
+jobs:
+  update-flavours:
+    name: Update flavours code quality checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+        with:
+          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Update flavours code quality checks
+        run: |
+          mkdir -p .github/workflows/flavors
+          for flavor in c_cpp ci_light cupcake documentation dotnet dotnetweb formatters go java javascript php python ruby rust salesforce security swift terraform
+          do
+            echo "::group::${flavor}"
+            sed -e 's|oxsecurity/megalinter|oxsecurity/megalinter/flavors/${flavor}|' .github/workflows/code-quality-check.yml > .github/workflows/flavors/${flavor}-code-quality-check.yml
+            echo "Updated .github/workflows/flavors/${flavor}-code-quality-check.yml"
+            echo "::endgroup::"
+          done
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "${{ github.workflow }}+github-actions[bot]@users.noreply.github.com"
+          git diff --exit-code || git commit -am "Automated report"
+          git diff --exit-code || git push
