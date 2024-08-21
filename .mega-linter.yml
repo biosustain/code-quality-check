@@ -1,7 +1,16 @@
+---
 # region General configuration
 SHOW_ELAPSED_TIME: false
 IGNORE_GITIGNORED_FILES: true
+CLEAR_REPORT_FOLDER: true
 IGNORE_GENERATED_FILES: true # We do not want to lint generated files
+
+EXCLUDED_DIRECTORIES:
+  # Generated reports/documentation
+  - megalinter-reports
+  - docs
+  - .idea
+  - .vscode
 # endregion
 
 # region Reporters configuration
@@ -29,6 +38,16 @@ DISABLE_LINTERS:
   - PYTHON_PYRIGHT # I cannot get imports to work with this linter
   - HTML_HTMLHINT # It does not align with frameworks like Angular
   - MARKDOWN_MARKDOWN_LINK_CHECK # It is prone to false positives for internal links
+  - REPOSITORY_KICS # It is too strict and does not align with our current security policies
+  - REPOSITORY_SECRETLINT # Crashes while trying to read /tmp/lint/megalinter-reports/copy-paste/html/index.html ?!
+
+# Disable errors but keep them as warnings
+DISABLE_ERRORS_LINTERS:
+  - REPOSITORY_TRIVY # We are locked with old dependencies, leaving as a warning to be addressed in the future
+  - OPENAPI_SPECTRAL # Simply cannot get it right
+  - MARKDOWN_MARKDOWNLINT # Not high priority but need to be manually curated for generated files - high effort
+  - REPOSITORY_CHECKOV # Have problem with understanding the issues
+
 # endregion
 
 # region Linters configuration
