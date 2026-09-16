@@ -119,7 +119,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@c7f9125735019aa87cfc361530512d50ea439c71 # v3.25.1
         with:
           sarif_file: "megalinter-reports/megalinter-report.sarif"
-
-      - name: Show report in job summary
-        if: always() && (steps.ml.outcome == 'success' || steps.ml.outcome == 'failure') # Only show if MegaLinter ran
-        run: tee "$GITHUB_STEP_SUMMARY" < megalinter-reports/megalinter-report.md
