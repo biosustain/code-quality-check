@@ -1,6 +1,9 @@
 name: Release
 
-on:
+# zizmor flags every workflow_run trigger. It is safe here: the checkout has no
+# ref, so it always takes the default branch rather than the revision that
+# triggered the run, and semantic-release only ever publishes from main.
+on: # zizmor: ignore[dangerous-triggers]
   workflow_dispatch:
     inputs:
       dry_run:
