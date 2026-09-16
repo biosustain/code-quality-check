@@ -47,6 +47,11 @@ DISABLE_ERRORS_LINTERS:
   - OPENAPI_SPECTRAL # Simply cannot get it right
   - MARKDOWN_MARKDOWNLINT # Not high priority but need to be manually curated for generated files - high effort
   - REPOSITORY_CHECKOV # Have problem with understanding the issues
+  # zizmor reports no errors here: it exits 0 and its SARIF holds only
+  # warning and note level results. MegaLinter v10.1.0 still counts one
+  # error, which is the hardcoded fallback in Linter.get_sarif_result_count.
+  # Keep the audit visible as warnings until that count is trustworthy.
+  - ACTION_ZIZMOR
 
 # endregion
 
@@ -62,6 +67,16 @@ PYTHON_PYLINT_ARGUMENTS: "--disable=import-error" # By default, when running the
 COPYPASTE_JSCPD_ARGUMENTS: "--min-tokens 300" # Raise the minimum number of tokens to consider a duplication - trying to reduce changes
 
 REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV_GHA_7" # allow action workflow dispatch inputs https://docs.prismacloud.io/en/enterprise-edition/policy-reference/build-integrity-policies/github-actions-policies/github-actions-contain-workflow-dispatch-input-parameters
+
+# actionlint keeps its own copy of the github context and has not picked up
+# job_workflow_sha yet, so it reports the documented property as undefined.
+# https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+ACTION_ACTIONLINT_ARGUMENTS: '-ignore "property \"job_workflow_sha\" is not defined"'
+
+# zizmor resolves every uses: clause through the GitHub API and fails the whole
+# audit when it cannot authenticate.
+ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
+  - GITHUB_TOKEN
 
 REPOSITORY_KICS_ARGUMENTS: "--disable-secrets" # We do not want to scan for secrets, this is done by other linters
 # endregion
