@@ -47,6 +47,11 @@ DISABLE_ERRORS_LINTERS:
   - OPENAPI_SPECTRAL # Simply cannot get it right
   - MARKDOWN_MARKDOWNLINT # Not high priority but need to be manually curated for generated files - high effort
   - REPOSITORY_CHECKOV # Have problem with understanding the issues
+  # zizmor reports no errors here: it exits 0 and its SARIF holds only
+  # warning and note level results. MegaLinter v10.1.0 still counts one
+  # error, which is the hardcoded fallback in Linter.get_sarif_result_count.
+  # Keep the audit visible as warnings until that count is trustworthy.
+  - ACTION_ZIZMOR
 
 # endregion
 
